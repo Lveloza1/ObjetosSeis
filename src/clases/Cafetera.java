@@ -19,7 +19,7 @@ public class Cafetera {
         this.cantidad_actual = cantidad_actual;
 
         if (cantidad_actual > capacidad_maxima) {
-            cantidad_actual = capacidad_maxima;
+            capacidad_maxima = cantidad_actual;
         }
     }
 
