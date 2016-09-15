@@ -5,6 +5,9 @@
  */
 package interfaz;
 
+import clases.Cafetera;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author lveloza1
@@ -14,6 +17,8 @@ public class principal extends javax.swing.JFrame {
     /**
      * Creates new form principal
      */
+    Cafetera c;
+
     public principal() {
         initComponents();
     }
@@ -66,13 +71,40 @@ public class principal extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel3.setText("Capacidad");
         jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, -1, -1));
+
+        txtCantidad.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCantidadKeyTyped(evt);
+            }
+        });
         jPanel2.add(txtCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 50, 90, 30));
+
+        txtCapacidad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCapacidadActionPerformed(evt);
+            }
+        });
+        txtCapacidad.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCapacidadKeyTyped(evt);
+            }
+        });
         jPanel2.add(txtCapacidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 20, 90, 30));
 
         cmdPredeterminada.setText("Predeterminada");
+        cmdPredeterminada.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdPredeterminadaActionPerformed(evt);
+            }
+        });
         jPanel2.add(cmdPredeterminada, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 130, 120, 30));
 
         cmdGuardar.setText("Guardar");
+        cmdGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdGuardarActionPerformed(evt);
+            }
+        });
         jPanel2.add(cmdGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, 120, 30));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 220, 170));
@@ -83,11 +115,23 @@ public class principal extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel4.setText("Servir tazas");
         jPanel3.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, -1, -1));
+
+        txtagregar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtagregarKeyTyped(evt);
+            }
+        });
         jPanel3.add(txtagregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 50, 90, 30));
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel5.setText("Agregar Café");
         jPanel3.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, -1, -1));
+
+        txtServir.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtServirKeyTyped(evt);
+            }
+        });
         jPanel3.add(txtServir, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 20, 90, 30));
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, 220, 110));
@@ -96,18 +140,43 @@ public class principal extends javax.swing.JFrame {
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         cmdServirTazas.setText("Servir Tazas");
+        cmdServirTazas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdServirTazasActionPerformed(evt);
+            }
+        });
         jPanel4.add(cmdServirTazas, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, 120, 40));
 
         cmdAgregarTazas.setText("Agregar tazas ");
+        cmdAgregarTazas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdAgregarTazasActionPerformed(evt);
+            }
+        });
         jPanel4.add(cmdAgregarTazas, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, 120, 40));
 
         cmdVaciarCafetera.setText("Vaciar Cafetera");
+        cmdVaciarCafetera.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdVaciarCafeteraActionPerformed(evt);
+            }
+        });
         jPanel4.add(cmdVaciarCafetera, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, 120, 40));
 
         cmdBorrar.setText("Nuevo");
+        cmdBorrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdBorrarActionPerformed(evt);
+            }
+        });
         jPanel4.add(cmdBorrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, 120, 40));
 
         cmdLlenarCafetera.setText("Llenar cafetera");
+        cmdLlenarCafetera.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdLlenarCafeteraActionPerformed(evt);
+            }
+        });
         jPanel4.add(cmdLlenarCafetera, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 120, 40));
 
         jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 50, 180, 280));
@@ -128,6 +197,111 @@ public class principal extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void cmdGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdGuardarActionPerformed
+        long cmaxima, cactual;
+        if (txtCapacidad.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Ingrese La capacidad de la cafetera");
+            txtCapacidad.requestFocusInWindow();
+
+        } else if (txtCantidad.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Ingrese la cantidad actual de la cafetera");
+            txtCantidad.requestFocusInWindow();
+        } else {
+            cmaxima = Long.parseLong(txtCapacidad.getText());
+            cactual = Long.parseLong(txtCapacidad.getText());
+
+            c = new Cafetera(cmaxima, cactual);
+            JOptionPane.showMessageDialog(this, "Guardado exitosamente");
+            txtCapacidad.setEditable(false);
+            txtCantidad.setEditable(false);
+        }
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmdGuardarActionPerformed
+
+    private void cmdPredeterminadaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdPredeterminadaActionPerformed
+        c = new Cafetera();
+        txtCapacidad.setText("1000");
+        txtCantidad.setText("0");
+        txtCapacidad.setEditable(false);
+        txtCantidad.setEditable(false);
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmdPredeterminadaActionPerformed
+
+    private void cmdLlenarCafeteraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdLlenarCafeteraActionPerformed
+        c.llenar_cafetera();
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmdLlenarCafeteraActionPerformed
+
+    private void cmdServirTazasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdServirTazasActionPerformed
+long servir;
+
+servir=Long.parseLong(txtServir.getText());
+
+c.servir_taza(servir);
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmdServirTazasActionPerformed
+
+    private void cmdAgregarTazasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdAgregarTazasActionPerformed
+long agregar;
+
+agregar=Long.parseLong(txtagregar.getText());
+
+c.agregar_cafe(agregar);
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmdAgregarTazasActionPerformed
+
+    private void cmdVaciarCafeteraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdVaciarCafeteraActionPerformed
+c.vaciar_cafetera();
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmdVaciarCafeteraActionPerformed
+
+    private void cmdBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdBorrarActionPerformed
+// agregar todo lo de borrar
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmdBorrarActionPerformed
+
+    private void txtCapacidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCapacidadActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCapacidadActionPerformed
+
+    private void txtCapacidadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCapacidadKeyTyped
+ char c = evt.getKeyChar();
+        if (!Character.isDigit(c)) {
+            getToolkit().beep();
+            evt.consume();
+        }
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCapacidadKeyTyped
+
+    private void txtCantidadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCantidadKeyTyped
+ char c = evt.getKeyChar();
+        if (!Character.isDigit(c)) {
+            getToolkit().beep();
+            evt.consume();
+        }
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCantidadKeyTyped
+
+    private void txtServirKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtServirKeyTyped
+ char c = evt.getKeyChar();
+        if (!Character.isDigit(c)) {
+            getToolkit().beep();
+            evt.consume();
+        }
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtServirKeyTyped
+
+    private void txtagregarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtagregarKeyTyped
+ char c = evt.getKeyChar();
+        if (!Character.isDigit(c)) {
+            getToolkit().beep();
+            evt.consume();
+        }
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtagregarKeyTyped
 
     /**
      * @param args the command line arguments

@@ -51,9 +51,14 @@ public class Cafetera {
 
     public void servir_taza(long servir) {
         long aux;
-        aux = this.getCantidad_actual() - servir;
-        this.setCantidad_actual(aux);
 
+        if (this.getCantidad_actual() < servir) {
+            aux = 0;
+            this.setCantidad_actual(aux);
+        } else {
+            aux = this.getCantidad_actual() - servir;
+            this.setCantidad_actual(aux);
+        }
     }
 
     public void vaciar_cafetera() {
@@ -61,10 +66,11 @@ public class Cafetera {
         this.setCantidad_actual(0);
 
     }
-    public void agregar_cafe(long agregar){
-      long aux;
-      aux=this.getCantidad_actual()+agregar;
-      this.setCantidad_actual(aux);
+
+    public void agregar_cafe(long agregar) {
+        long aux;
+        aux = this.getCantidad_actual() + agregar;
+        this.setCantidad_actual(aux);
     }
 
 }
