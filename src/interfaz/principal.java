@@ -21,6 +21,18 @@ public class principal extends javax.swing.JFrame {
 
     public principal() {
         initComponents();
+        cmdGuardar.setEnabled(true);
+        cmdPredeterminada.setEnabled(true);
+        cmdLlenarCafetera.setEnabled(false);
+        cmdServirTazas.setEnabled(false);
+        cmdAgregarTazas.setEnabled(false);
+        cmdVaciarCafetera.setEnabled(false);
+        cmdBorrar.setEnabled(true);
+
+        txtCantidad.setEditable(true);
+        txtCapacidad.setEditable(true);
+        txtServir.setEditable(false);
+        txtAgregar.setEditable(false);
     }
 
     /**
@@ -43,7 +55,7 @@ public class principal extends javax.swing.JFrame {
         cmdGuardar = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
-        txtagregar = new javax.swing.JTextField();
+        txtAgregar = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         txtServir = new javax.swing.JTextField();
         jPanel4 = new javax.swing.JPanel();
@@ -116,12 +128,12 @@ public class principal extends javax.swing.JFrame {
         jLabel4.setText("Servir tazas");
         jPanel3.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, -1, -1));
 
-        txtagregar.addKeyListener(new java.awt.event.KeyAdapter() {
+        txtAgregar.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtagregarKeyTyped(evt);
+                txtAgregarKeyTyped(evt);
             }
         });
-        jPanel3.add(txtagregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 50, 90, 30));
+        jPanel3.add(txtAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 50, 90, 30));
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel5.setText("Agregar Café");
@@ -202,19 +214,37 @@ public class principal extends javax.swing.JFrame {
         long cmaxima, cactual;
         if (txtCapacidad.getText().trim().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Ingrese La capacidad de la cafetera");
+            cmdGuardar.setEnabled(true);
+            cmdPredeterminada.setEnabled(true);
+            txtCapacidad.setEditable(true);
             txtCapacidad.requestFocusInWindow();
 
         } else if (txtCantidad.getText().trim().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Ingrese la cantidad actual de la cafetera");
+            cmdGuardar.setEnabled(true);
+            cmdPredeterminada.setEnabled(true);
+            txtCantidad.setEditable(true);
             txtCantidad.requestFocusInWindow();
         } else {
             cmaxima = Long.parseLong(txtCapacidad.getText());
-            cactual = Long.parseLong(txtCapacidad.getText());
+            cactual = Long.parseLong(txtCantidad.getText());
 
             c = new Cafetera(cmaxima, cactual);
+
             JOptionPane.showMessageDialog(this, "Guardado exitosamente");
+            cmdGuardar.setEnabled(false);
+            cmdPredeterminada.setEnabled(false);
             txtCapacidad.setEditable(false);
             txtCantidad.setEditable(false);
+
+            cmdLlenarCafetera.setEnabled(true);
+            cmdServirTazas.setEnabled(true);
+            cmdAgregarTazas.setEnabled(true);
+            cmdVaciarCafetera.setEnabled(true);
+            cmdBorrar.setEnabled(true);
+
+            txtServir.setEditable(false);
+            txtAgregar.setEditable(false);
         }
 
         // TODO add your handling code here:
@@ -222,44 +252,191 @@ public class principal extends javax.swing.JFrame {
 
     private void cmdPredeterminadaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdPredeterminadaActionPerformed
         c = new Cafetera();
+        JOptionPane.showMessageDialog(this, "Guardado exitosamente");
         txtCapacidad.setText("1000");
         txtCantidad.setText("0");
         txtCapacidad.setEditable(false);
         txtCantidad.setEditable(false);
+
+        cmdGuardar.setEnabled(false);
+        cmdPredeterminada.setEnabled(false);
+        cmdLlenarCafetera.setEnabled(true);
+        cmdServirTazas.setEnabled(true);
+        cmdAgregarTazas.setEnabled(true);
+        cmdVaciarCafetera.setEnabled(true);
+        cmdBorrar.setEnabled(true);
+
+        txtCantidad.setEditable(false);
+        txtCapacidad.setEditable(false);
+        txtServir.setEditable(false);
+        txtAgregar.setEditable(false);
         // TODO add your handling code here:
     }//GEN-LAST:event_cmdPredeterminadaActionPerformed
 
     private void cmdLlenarCafeteraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdLlenarCafeteraActionPerformed
         c.llenar_cafetera();
+        txtCantidad.setText("" + c.getCantidad_actual());
+        JOptionPane.showMessageDialog(this, "Cafetera llenada con éxito");
+
+        txtCapacidad.setEditable(false);
+        txtCantidad.setEditable(false);
+
+        cmdGuardar.setEnabled(false);
+        cmdPredeterminada.setEnabled(false);
+        cmdLlenarCafetera.setEnabled(true);
+        cmdServirTazas.setEnabled(true);
+        cmdAgregarTazas.setEnabled(true);
+        cmdVaciarCafetera.setEnabled(true);
+        cmdBorrar.setEnabled(true);
+
+        txtCantidad.setEditable(false);
+        txtCapacidad.setEditable(false);
+        txtServir.setEditable(false);
+        txtAgregar.setEditable(false);
+
         // TODO add your handling code here:
     }//GEN-LAST:event_cmdLlenarCafeteraActionPerformed
 
     private void cmdServirTazasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdServirTazasActionPerformed
-long servir;
+        long servir;
 
-servir=Long.parseLong(txtServir.getText());
+        txtServir.setEditable(true);
+        txtServir.requestFocusInWindow();
 
-c.servir_taza(servir);
+        if (txtServir.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Digite la cantidad de tazas que desea servir ");
+            txtServir.requestFocusInWindow();
+
+        } else if (c.getCantidad_actual() == 0) {
+            JOptionPane.showMessageDialog(this, "La cafetera está vacía ", "Error", JOptionPane.ERROR_MESSAGE);
+            txtServir.setText("");
+        } else {
+            servir = Long.parseLong(txtServir.getText());
+
+            if (c.getCantidad_actual() < servir) {
+                JOptionPane.showMessageDialog(this, "No hay suficientes tazas de café para servir, se le servirá lo que queda");
+                c.servir_taza(servir);
+                txtCantidad.setText("" + c.getCantidad_actual());
+                txtServir.setText("");
+            } else {
+                c.servir_taza(servir);
+                txtCantidad.setText("" + c.getCantidad_actual());
+                JOptionPane.showMessageDialog(this, "Tazas servidas con éxito");
+                txtServir.setText("");
+                txtAgregar.setText("");
+                txtServir.setEditable(false);
+            }
+        }
+
+        cmdGuardar.setEnabled(false);
+        cmdPredeterminada.setEnabled(false);
+        cmdLlenarCafetera.setEnabled(true);
+        cmdServirTazas.setEnabled(true);
+        cmdAgregarTazas.setEnabled(true);
+        cmdVaciarCafetera.setEnabled(true);
+        cmdBorrar.setEnabled(true);
+
+        txtCantidad.setEditable(false);
+        txtCapacidad.setEditable(false);
+        txtAgregar.setEditable(false);
 
         // TODO add your handling code here:
     }//GEN-LAST:event_cmdServirTazasActionPerformed
 
     private void cmdAgregarTazasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdAgregarTazasActionPerformed
-long agregar;
+        long agregar;
 
-agregar=Long.parseLong(txtagregar.getText());
+        txtAgregar.setEditable(true);
+        txtAgregar.requestFocusInWindow();
 
-c.agregar_cafe(agregar);
+        if (txtAgregar.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Digite la cantidad de café que desea agregar ");
+            txtAgregar.requestFocusInWindow();
+
+        } else {
+            agregar = Long.parseLong(txtAgregar.getText());
+            
+            if (c.getCapacidad_maxima() < agregar) {
+                JOptionPane.showMessageDialog(this, "La cantidad agregada no puede ser mayor a la capacidad de la cafetera","Error",JOptionPane.ERROR_MESSAGE);
+                txtCantidad.setText("" + c.getCantidad_actual());
+                txtAgregar.requestFocusInWindow();
+                txtAgregar.selectAll();
+            } else {
+
+                c.agregar_cafe(agregar);
+                
+                if(c.getCapacidad_maxima() < c.getCantidad_actual()){
+                    JOptionPane.showMessageDialog(this, "La cantidad total no puede ser mayor a la capacidad de la cafetera", "Error", JOptionPane.ERROR_MESSAGE);
+                    txtAgregar.requestFocusInWindow();
+                    txtAgregar.selectAll();
+                }
+                else{
+                txtCantidad.setText("" + c.getCantidad_actual());
+                JOptionPane.showMessageDialog(this, "Cantidad de café agregada con éxito");
+                txtAgregar.setText("");
+                txtServir.setText("");
+                txtAgregar.setEditable(false);
+                }
+            }
+        }
+        cmdGuardar.setEnabled(false);
+        cmdPredeterminada.setEnabled(false);
+        cmdLlenarCafetera.setEnabled(true);
+        cmdServirTazas.setEnabled(true);
+        cmdAgregarTazas.setEnabled(true);
+        cmdVaciarCafetera.setEnabled(true);
+        cmdBorrar.setEnabled(true);
+
+        txtCantidad.setEditable(false);
+        txtCapacidad.setEditable(false);
+        txtServir.setEditable(false);
+
         // TODO add your handling code here:
     }//GEN-LAST:event_cmdAgregarTazasActionPerformed
 
     private void cmdVaciarCafeteraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdVaciarCafeteraActionPerformed
-c.vaciar_cafetera();
+        c.vaciar_cafetera();
+        txtCantidad.setText("" + c.getCantidad_actual());
+        JOptionPane.showMessageDialog(this, "Cafetera vaciada con éxito");
+
+        cmdGuardar.setEnabled(false);
+        cmdPredeterminada.setEnabled(false);
+        cmdLlenarCafetera.setEnabled(true);
+        cmdServirTazas.setEnabled(true);
+        cmdAgregarTazas.setEnabled(true);
+        cmdVaciarCafetera.setEnabled(true);
+        cmdBorrar.setEnabled(true);
+
+        txtCantidad.setEditable(false);
+        txtCapacidad.setEditable(false);
+        txtServir.setEditable(false);
+        txtAgregar.setEditable(false);
         // TODO add your handling code here:
     }//GEN-LAST:event_cmdVaciarCafeteraActionPerformed
 
     private void cmdBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdBorrarActionPerformed
 // agregar todo lo de borrar
+
+        c = null;
+
+        txtCapacidad.setText("");
+        txtCantidad.setText("");
+        txtServir.setText("");
+        txtAgregar.setText("");
+        txtCapacidad.requestFocusInWindow();
+
+        cmdGuardar.setEnabled(true);
+        cmdPredeterminada.setEnabled(true);
+        cmdLlenarCafetera.setEnabled(false);
+        cmdServirTazas.setEnabled(false);
+        cmdAgregarTazas.setEnabled(false);
+        cmdVaciarCafetera.setEnabled(false);
+        cmdBorrar.setEnabled(true);
+
+        txtCantidad.setEditable(true);
+        txtCapacidad.setEditable(true);
+        txtServir.setEditable(false);
+        txtAgregar.setEditable(false);
         // TODO add your handling code here:
     }//GEN-LAST:event_cmdBorrarActionPerformed
 
@@ -268,7 +445,7 @@ c.vaciar_cafetera();
     }//GEN-LAST:event_txtCapacidadActionPerformed
 
     private void txtCapacidadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCapacidadKeyTyped
- char c = evt.getKeyChar();
+        char c = evt.getKeyChar();
         if (!Character.isDigit(c)) {
             getToolkit().beep();
             evt.consume();
@@ -277,7 +454,7 @@ c.vaciar_cafetera();
     }//GEN-LAST:event_txtCapacidadKeyTyped
 
     private void txtCantidadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCantidadKeyTyped
- char c = evt.getKeyChar();
+        char c = evt.getKeyChar();
         if (!Character.isDigit(c)) {
             getToolkit().beep();
             evt.consume();
@@ -286,7 +463,7 @@ c.vaciar_cafetera();
     }//GEN-LAST:event_txtCantidadKeyTyped
 
     private void txtServirKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtServirKeyTyped
- char c = evt.getKeyChar();
+        char c = evt.getKeyChar();
         if (!Character.isDigit(c)) {
             getToolkit().beep();
             evt.consume();
@@ -294,14 +471,14 @@ c.vaciar_cafetera();
         // TODO add your handling code here:
     }//GEN-LAST:event_txtServirKeyTyped
 
-    private void txtagregarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtagregarKeyTyped
- char c = evt.getKeyChar();
+    private void txtAgregarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAgregarKeyTyped
+        char c = evt.getKeyChar();
         if (!Character.isDigit(c)) {
             getToolkit().beep();
             evt.consume();
         }
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtagregarKeyTyped
+    }//GEN-LAST:event_txtAgregarKeyTyped
 
     /**
      * @param args the command line arguments
@@ -355,9 +532,9 @@ c.vaciar_cafetera();
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JTextField txtAgregar;
     private javax.swing.JTextField txtCantidad;
     private javax.swing.JTextField txtCapacidad;
     private javax.swing.JTextField txtServir;
-    private javax.swing.JTextField txtagregar;
     // End of variables declaration//GEN-END:variables
 }
